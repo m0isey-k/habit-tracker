@@ -161,10 +161,6 @@ Aplikacja jest gotowa do użycia bez dodatkowej konfiguracji.
   - błędy
   - problemy z autoryzacją
   - start aplikacji
-- Jest to poprawne i zgodne z praktyką produkcyjną
-
----
 
 
 
-Po ich dodaniu zalecane jest:
