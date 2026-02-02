@@ -1,6 +1,9 @@
-import { Link, useLocation } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import { cn } from "../lib/utils"
-import { ThemeToggle } from "./ThemeToggle.tsx"
+import { ThemeToggle } from "./ThemeToggle"
+import { Button } from "./ui/button"
+import { authAPI } from "../api/api"
+import { isAuthed } from "../auth/tokens"
 
 const navItems = [
   { href: "/dashboard", label: "Dashboard" },
@@ -11,6 +14,14 @@ const navItems = [
 
 export function Navigation() {
   const { pathname } = useLocation()
+  const nav = useNavigate()
+
+  const logout = () => {
+    authAPI.logout()
+    nav("/login", { replace: true })
+  }
+
+  const authed = isAuthed()
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border bg-background/80 backdrop-blur">
@@ -19,6 +30,7 @@ export function Navigation() {
           <Link to="/dashboard" className="text-lg font-semibold text-foreground">
             HabitFlow
           </Link>
+
           <nav className="hidden items-center gap-1 md:flex">
             {navItems.map((item) => (
               <Link
@@ -36,7 +48,15 @@ export function Navigation() {
             ))}
           </nav>
         </div>
-        <ThemeToggle />
+
+        <div className="flex items-center gap-2">
+          {authed ? (
+            <Button variant="outline" size="sm" onClick={logout}>
+              Logout
+            </Button>
+          ) : null}
+          <ThemeToggle />
+        </div>
       </div>
 
       <nav className="flex items-center gap-1 overflow-x-auto border-t border-border px-4 py-2 md:hidden">
@@ -54,6 +74,14 @@ export function Navigation() {
             {item.label}
           </Link>
         ))}
+        {authed ? (
+          <button
+            onClick={logout}
+            className="ml-auto whitespace-nowrap rounded-md px-3 py-1.5 text-sm font-medium text-muted-foreground hover:bg-accent hover:text-foreground"
+          >
+            Logout
+          </button>
+        ) : null}
       </nav>
     </header>
   )

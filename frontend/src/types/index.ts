@@ -27,3 +27,10 @@ export interface CreateDailyLogInput {
   note?: string
   trigger_id?: number
 }
+
+export type CreateHabitInput = {
+  name: string
+  start_date: string
+  goal_days: number
+  is_active?: boolean
+}
