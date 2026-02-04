@@ -20,7 +20,9 @@ w całości za pomocą **Docker Compose**.
 
 Z katalogu głównego projektu:
 
-```docker compose up --build```
+```bash
+docker compose up --build
+```
 
 Po uruchomieniu:
 - Frontend: http://localhost  
@@ -29,7 +31,9 @@ Po uruchomieniu:
 Aplikacja jest gotowa do użycia bez dodatkowej konfiguracji.
 
 ### Zatrzymanie
-```docker compose down```  
+```bash
+docker compose down
+```  
 
 
 
